@@ -20,7 +20,7 @@ app.use('/', routes)
 
 //post book data to json
 
-app.post('/book', (req, res,) => {
+/* app.post('/book', (req, res,) => {
   const book = req.body;
 
 console.log(book);
@@ -31,7 +31,7 @@ return res.send('Book is added to the database');
 
 app.get ('/books', (req, res) => {
     return res.send("get");
-});
+}); */
 
 app.put('/books', (req, res) => { 
   return res.send('put');
