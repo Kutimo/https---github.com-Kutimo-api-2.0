@@ -1,5 +1,5 @@
 function fetchData() {
-    fetch('http://localhost:8000/api/users')
+    fetch('http://localhost:8000/api/books')
         .then(response => {
             if (!response.ok) {
                 throw Error("ERROR");
@@ -11,8 +11,8 @@ function fetchData() {
                 .map(book => {
                     return `
         <div class="book">
-        <h2>${book.name}</h2>
-        <p>${book.email}</p>
+        <h2>${book.bookName}</h2>
+        <p>${book.author}</p>
         <p>${book.isbn}</p> 
         </div>
         `;

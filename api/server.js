@@ -24,7 +24,7 @@ app.get("/api/books", (req, res, next) => {
   });
 });
 
-app.get("/api/books/:id", (req, res, next) => {
+app.get("/api/book/:id", (req, res, next) => {
   var sql = "select * from books where id = ?";
   var params = [req.params.id];
   db.get(sql, params, (err, row) => {
