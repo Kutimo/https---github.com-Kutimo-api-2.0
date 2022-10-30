@@ -1,0 +1,17 @@
+#books {
+    display: flex;
+    gap: 20px;
+}
+
+.book {
+    background-color: lightgray;
+    height: 100%;
+    width: 20vh;
+    padding: 10px;
+    text-align: left;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -11,14 +11,14 @@ function fetchData() {
                 .map(book => {
                     return `
         <div class="book">
-        <p>${book.name}</p>
+        <h2>${book.name}</h2>
         <p>${book.email}</p>
         <p>${book.isbn}</p> 
         </div>
         `;
                 })
                 .join("");
-            document.querySelector("#app").insertAdjacentHTML("afterbegin", html);
+            document.querySelector("#books").insertAdjacentHTML("afterbegin", html);
         })
         .catch(error => {
             console.log(error);
