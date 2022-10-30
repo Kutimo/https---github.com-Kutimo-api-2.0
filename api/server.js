@@ -9,8 +9,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 
-app.get("/api/users", (req, res, next) => {
-  var sql = "select * from user";
+app.get("/api/books", (req, res, next) => {
+  var sql = "select * from books";
   var params = [];
   db.all(sql, params, (err, rows) => {
     if (err) {
@@ -24,8 +24,8 @@ app.get("/api/users", (req, res, next) => {
   });
 });
 
-app.get("/api/user/:id", (req, res, next) => {
-  var sql = "select * from user where id = ?";
+app.get("/api/books/:id", (req, res, next) => {
+  var sql = "select * from books where id = ?";
   var params = [req.params.id];
   db.get(sql, params, (err, row) => {
     if (err) {
@@ -39,7 +39,7 @@ app.get("/api/user/:id", (req, res, next) => {
   });
 });
 
-app.post("/api/user/", (req, res, next) => {
+app.post("/api/books/", (req, res, next) => {
   var errors = [];
   if (!req.body.isbn) {
     errors.push("No isbn specified");
@@ -56,7 +56,7 @@ app.post("/api/user/", (req, res, next) => {
     email: req.body.email,
     isbn: req.body.isbn,
   };
-  var sql = "INSERT INTO user (name, email, isbn) VALUES (?,?,?)";
+  var sql = "INSERT INTO books (name, email, isbn) VALUES (?,?,?)";
   var params = [data.name, data.email, data.isbn];
   db.run(sql, params, function (err, result) {
     if (err) {
@@ -71,14 +71,14 @@ app.post("/api/user/", (req, res, next) => {
   });
 });
 
-app.patch("/api/user/:id", (req, res, next) => {
+app.patch("/api/books/:id", (req, res, next) => {
   var data = {
     name: req.body.name,
     email: req.body.email,
     isbn: req.body.isbn,
   };
   db.run(
-    `UPDATE user set 
+    `UPDATE books set 
          name = COALESCE(?,name), 
          email = COALESCE(?,email), 
          isbn = COALESCE(?,isbn) 
@@ -98,8 +98,8 @@ app.patch("/api/user/:id", (req, res, next) => {
   );
 });
 
-app.delete("/api/user/:id", (req, res, next) => {
-  db.run("DELETE FROM user WHERE id = ?", req.params.id, function (err, result) {
+app.delete("/api/books/:id", (req, res, next) => {
+  db.run("DELETE FROM books WHERE id = ?", req.params.id, function (err, result) {
     if (err) {
       res.status(400).json({ error: res.message });
       return;

@@ -9,21 +9,21 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
         throw err
     } else {
         console.log('Connected to the SQLite database.')
-        db.run(`CREATE TABLE user (
+        db.run(`CREATE TABLE books (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name text, 
-            email text, 
-            isbn text, 
-            CONSTRAINT email_unique UNIQUE (email)
+            bookName text, 
+            author text, 
+            isbn text UNIQUE, 
+            CONSTRAINT isbn_unique UNIQUE (isbn)
             )`,
             (err) => {
                 if (err) {
                     // Table already created
                 } else {
                     // Table just created, creating some rows
-                    var insert = 'INSERT INTO user (name, email, isbn) VALUES (?,?,?)'
-                    db.run(insert, ["admin", "admin@example.com",
-                        ("admin123456")])
+                    var insert = 'INSERT INTO books (bookName, author, isbn) VALUES (?,?,?)'
+                    db.run(insert, ["A Practical Handbook of Software Construction McConnell", "Steve McConnell",
+                        ("9780735619678")])
                     db.run(insert, ["user", "user@example.com", ("user123456")])
                 }
             });
